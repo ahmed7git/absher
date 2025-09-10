@@ -50,7 +50,7 @@ class AppRoutes {
     ),
     GetPage(
       name: home,
-      page: () => const Home(),
+      page: () => const HomeScreen(),
       binding:HomeBinding (),
     ),
     

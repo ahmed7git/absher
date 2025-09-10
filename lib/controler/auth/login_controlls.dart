@@ -5,15 +5,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginController extends GetxController
     with GetSingleTickerProviderStateMixin {
-
   final supabase = Supabase.instance.client;
-  var isLoading = false.obs;
-
   final formKey = GlobalKey<FormState>();
+  var isLoading = false.obs;
 
   late TextEditingController emailController;
   late TextEditingController passwordController;
-
   late AnimationController animationController;
   late Animation<Offset> slideAnimation;
   late Animation<double> fadeAnimation;
@@ -23,6 +20,7 @@ class LoginController extends GetxController
     super.onInit();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+
     animationController = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
@@ -43,7 +41,6 @@ class LoginController extends GetxController
       ),
     );
 
-
     Future.delayed(const Duration(milliseconds: 300), () {
       if (!isClosed) {
         animationController.forward();
@@ -53,13 +50,11 @@ class LoginController extends GetxController
 
   @override
   void onClose() {
-
     emailController.dispose();
     passwordController.dispose();
     animationController.dispose();
     super.onClose();
   }
-
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -75,40 +70,44 @@ class LoginController extends GetxController
     if (value == null || value.isEmpty) {
       return 'الرجاء إدخال كلمة المرور';
     }
+    if (value.length < 6) {
+      return 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
+    }
     return null;
   }
 
-  // --- دالة تسجيل الدخول ---
   Future<void> login() async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
-
     isLoading.value = true;
     try {
-    
       await supabase.auth.signInWithPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
 
-     
       Get.offAllNamed(AppRoutes.home);
     } on AuthException catch (e) {
-      Get.snackbar(
-        'خطأ في تسجيل الدخول',
-        e.message,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      Get.snackbar('خطأ في تسجيل الدخول', e.message);
     } catch (e) {
-      Get.snackbar(
-        'خطأ غير متوقع',
-        'حدث خطأ ما، يرجى المحاولة مرة أخرى.',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      Get.snackbar('خطأ غير متوقع', 'حدث خطأ ما، يرجى المحاولة مرة أخرى.');
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      await supabase.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: 'io.supabase.flutterquickstart://login-callback/',
+      );
+    } on AuthException catch (e) {
+      Get.snackbar('خطأ في تسجيل الدخول', e.message);
+    } catch (e) {
+      Get.snackbar('خطأ غير متوقع', 'حدث خطأ ما، يرجى المحاولة مرة أخرى.');
     }
   }
 }

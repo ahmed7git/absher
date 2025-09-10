@@ -47,7 +47,7 @@ class Loginform extends StatelessWidget {
             const SizedBox(height: 24),
             LoginDivider(),
             const SizedBox(height: 24),
-            LoginSocialloginbuttons(),
+            LoginSocialloginbuttons( onPressed: controller.signInWithGoogle),
             const Spacer(),
           ],
         ),

@@ -3,12 +3,13 @@ import 'package:abshr/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class LoginSocialloginbuttons extends StatelessWidget {
-  const LoginSocialloginbuttons({super.key});
+  final VoidCallback onPressed;
+  const LoginSocialloginbuttons({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {}, // Logic for Google Sign-In
+      onPressed: onPressed, 
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

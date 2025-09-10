@@ -12,7 +12,7 @@ class SignUpHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      padding: const EdgeInsets.only(left: 24,right: 24, top:1,bottom: 10),
       child: SafeArea(
         bottom: false,
         child: Column(
