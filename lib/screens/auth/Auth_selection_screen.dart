@@ -14,28 +14,25 @@ class AuthSelectionScreen extends GetView<AuthSelectionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
+
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-
-          
           Expanded(
-            flex: 4, 
+            flex: 4,
             child: FadeTransition(
-              opacity: controller.fadeAnimation, 
+              opacity: controller.fadeAnimation,
               child: const Header(),
             ),
           ),
-          
-
           Expanded(
-            flex: 6, 
+            flex: 6,
             child: SlideTransition(
               position: controller.slideAnimation,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: AppColors.primaryGreen,
+                  color: AppColors.primaryGreen, 
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -67,6 +64,7 @@ class AuthSelectionScreen extends GetView<AuthSelectionController> {
                       }),
                       const Spacer(),
                       ContinueButton(onPressed: controller.onContinuePressed),
+
                       const SizedBox(height: 40),
                     ],
                   ),
@@ -79,4 +77,3 @@ class AuthSelectionScreen extends GetView<AuthSelectionController> {
     );
   }
 }
-

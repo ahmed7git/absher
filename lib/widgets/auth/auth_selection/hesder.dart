@@ -1,5 +1,4 @@
 import 'package:abshr/constants/app_thems.dart';
-import 'package:abshr/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -10,6 +9,7 @@ class Header extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(32, 70, 32, 30),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: const EdgeInsets.all(24),
@@ -24,11 +24,16 @@ class Header extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Text("أهلاً بك في أبشر", style: AppTextStyles.headlineLarge),
+
+          Text(
+            "أهلاً بك في أبشر",
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
           const SizedBox(height: 8),
+
           Text(
             "اختر هويتك للبدء في رحلتك معنا",
-            style: AppTextStyles.bodySmall.copyWith(fontSize: 15),
+            style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
         ],

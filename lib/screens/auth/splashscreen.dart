@@ -1,4 +1,3 @@
-import 'package:abshr/constants/app_thems.dart';
 import 'package:abshr/controler/auth/splash_controller.dart';
 import 'package:abshr/widgets/auth/splash_screen/An_Bottom_circle.dart';
 import 'package:abshr/widgets/auth/splash_screen/An_Logo.dart';
@@ -13,7 +12,7 @@ class SplashScreen extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
           AnimatedTopCircle(animation: controller.topCircleAnimation),

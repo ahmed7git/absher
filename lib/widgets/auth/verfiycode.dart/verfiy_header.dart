@@ -1,4 +1,3 @@
-
 import 'package:abshr/constants/app_thems.dart';
 import 'package:abshr/constants/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -11,26 +10,28 @@ class VerfiyHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.only(left: 24,right: 24, top:1,bottom: 10),
-
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: SafeArea(
         bottom: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back, color: AppColors.white),
-              onPressed: () => Get.back(),
-              padding: EdgeInsets.zero,
-              alignment: Alignment.centerLeft,
+           
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                
+                icon: const Icon(Icons.arrow_forward, color: AppColors.white),
+                onPressed: () => Get.back(),
+              ),
             ),
             const Spacer(),
             Text(
               'التحقق من الرمز',
               style: AppTextStyles.headlineLarge.copyWith(
                 color: AppColors.white,
-                fontSize: 36,
+                fontSize: 34, // Adjusted font size
               ),
             ),
             const SizedBox(height: 8),
@@ -40,6 +41,7 @@ class VerfiyHeader extends StatelessWidget {
                 color: AppColors.white.withOpacity(0.9),
               ),
             ),
+             const SizedBox(height: 20), 
           ],
         ),
       ),

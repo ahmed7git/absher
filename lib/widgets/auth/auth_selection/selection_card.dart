@@ -1,6 +1,4 @@
-import 'package:abshr/constants/text_styles.dart';
 import 'package:flutter/material.dart';
-
 
 class SelectionCard extends StatelessWidget {
   final IconData icon;
@@ -26,23 +24,26 @@ class SelectionCard extends StatelessWidget {
         duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: isSelected 
-               ? Colors.white.withOpacity(0.2)
-               : Colors.black.withOpacity(0.1),
+          color: isSelected
+              ? Colors.white.withOpacity(0.2)
+              : Colors.black.withOpacity(0.1),
           borderRadius: BorderRadius.circular(20),
-         border: Border.all(
+          border: Border.all(
             color: isSelected ? Colors.white : Colors.transparent,
             width: 2.0,
           ),
         ),
         child: Row(
           children: [
-              AnimatedScale(
+            AnimatedScale(
               duration: const Duration(milliseconds: 400),
               curve: Curves.easeOutBack,
               scale: isSelected ? 1.0 : 0.0,
-              child:
-                  const Icon(Icons.check_circle, color: Colors.white, size: 28),
+              child: const Icon(
+                Icons.check_circle,
+                color: Colors.white,
+                size: 28,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -51,20 +52,26 @@ class SelectionCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTextStyles.headlineMedium.copyWith(
-                    fontWeight: FontWeight.bold, color: Colors.white
-                    )
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 18,
                     ),
+                  ),
                   const SizedBox(height: 4),
+
                   Text(
                     subtitle,
-                    style: AppTextStyles.bodySmall.copyWith(
-                    color: Colors.white.withOpacity(0.8), height: 1.5),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.white.withOpacity(0.8),
+                      height: 1.5,
+                      fontSize: 13,
+                    ),
                   ),
                 ],
               ),
             ),
-          const SizedBox(width: 10),
+            const SizedBox(width: 10),
             Icon(icon, color: Colors.white, size: 32),
           ],
         ),

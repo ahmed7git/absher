@@ -1,36 +1,17 @@
-
-import 'dart:async';
-import 'package:abshr/app_route.dart';
 import 'package:abshr/constants/app_thems.dart';
-import 'package:abshr/constants/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class SignUpSuccessScreen extends StatefulWidget {
+class SignUpSuccessScreen extends StatelessWidget {
   const SignUpSuccessScreen({Key? key}) : super(key: key);
 
   @override
-  SignUpSuccessScreenState createState() => SignUpSuccessScreenState();
-}
-
-class SignUpSuccessScreenState extends State<SignUpSuccessScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 5), () {
-      if (mounted) {
-        Get.offAllNamed(AppRoutes.home);
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-      decoration: const BoxDecoration(
-        color: AppColors.backgroundSecondary,
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
         ),
@@ -56,25 +37,18 @@ class SignUpSuccessScreenState extends State<SignUpSuccessScreen> {
             child: const Icon(Icons.check, color: AppColors.success, size: 50),
           ),
           const SizedBox(height: 24),
-          Text('نجاح!', style: AppTextStyles.headlineLarge.copyWith(fontSize: 28)),
+          Text('نجاح!',
+              style:
+                  Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 28)),
           const SizedBox(height: 8),
           Text(
-            'تم إنشاء حسابك بنجاح.',
+            'تم التحقق من حسابك بنجاح!',
             textAlign: TextAlign.center,
-            style: AppTextStyles.bodyLarge.copyWith(color: AppColors.textSecondary),
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
-          const SizedBox(height: 16),
-
-          Text(
-            'سيتم نقلك إلى الصفحة الرئيسية خلال لحظات...',
-            textAlign: TextAlign.center,
-            style: AppTextStyles.bodySmall.copyWith(color: AppColors.textLight),
-          ),
-
           const SizedBox(height: 48),
         ],
       ),
     );
   }
 }
-

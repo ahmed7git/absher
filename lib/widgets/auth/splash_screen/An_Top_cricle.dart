@@ -9,11 +9,11 @@ class AnimatedTopCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+     return Positioned(
       top: -Get.width * 0.3,
       right: -Get.width * 0.3,
       child: SlideTransition(
-        position: animation, 
+        position: animation,
         child: Container(
           width: Get.width * 0.7,
           height: Get.width * 0.7,

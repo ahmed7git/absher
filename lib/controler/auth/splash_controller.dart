@@ -50,8 +50,11 @@ class SplashController extends GetxController
 
     animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        if (supabase.auth.currentUser == null) {
-          Get.offNamed(AppRoutes.selection);
+        final currentUser = supabase.auth.currentUser;
+        if (currentUser != null) {
+          _redirectUser(currentUser);
+        } else {
+          Get.offAllNamed(AppRoutes.selection);
         }
       }
     });
@@ -59,21 +62,36 @@ class SplashController extends GetxController
 
   void _setupAuthListener() {
     _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
-      final Session? session = data.session;
-      if (session != null) {
-        Get.offAllNamed(AppRoutes.home);
+      if (data.event == AuthChangeEvent.signedOut) {
+        Get.offAllNamed(AppRoutes.selection);
       }
     });
+  }
+
+  Future<void> _redirectUser(User user) async {
+    try {
+      final response = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+      
+      final role = response['role'];
+
+      if (role == 'provider') {
+        Get.offAllNamed(AppRoutes.providerHome);
+      } else {
+        Get.offAllNamed(AppRoutes.home);
+      }
+    } catch (e) {
+      Get.offAllNamed(AppRoutes.home);
+    }
   }
 
   @override
   void onReady() {
     super.onReady();
-    if (supabase.auth.currentUser == null) {
-      animationController.forward();
-    } else {
-      Get.offAllNamed(AppRoutes.home);
-    }
+    animationController.forward();
   }
 
   @override
@@ -83,3 +101,4 @@ class SplashController extends GetxController
     super.onClose();
   }
 }
+

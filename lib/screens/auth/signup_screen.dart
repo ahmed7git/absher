@@ -5,7 +5,7 @@ import 'package:abshr/widgets/auth/signup/SignUpHeader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpScreen extends GetView<SignUpController> {
+class SignUpScreen extends GetView<SignupController> {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
@@ -31,7 +31,18 @@ class SignUpScreen extends GetView<SignUpController> {
                       flex: 7,
                       child: SlideTransition(
                         position: controller.slideAnimation,
-                        child: SignUpFormContainer(controller: controller),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 32),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50),
+                            ),
+                          ),
+                          child: SignupForm(controller: controller), 
+                        ),
                       ),
                     ),
                   ],

@@ -1,4 +1,3 @@
-
 import 'package:abshr/constants/app_thems.dart';
 import 'package:abshr/constants/text_styles.dart';
 import 'package:abshr/controler/auth/verfiycode_controller.dart';
@@ -9,42 +8,42 @@ class VerificationCard extends StatelessWidget {
   final VerifyCodeController controller;
 
   const VerificationCard({Key? key, required this.controller})
-      : super(key: key);
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
       width: 50,
       height: 55,
-      textStyle: AppTextStyles.headlineMedium
-          .copyWith(fontSize: 22, color: AppColors.textPrimary),
+      textStyle: Theme.of(
+        context,
+      ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
       decoration: BoxDecoration(
-        color: AppColors.lightGray,
+        color: Theme.of(context).colorScheme.surfaceVariant,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.transparent),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+        ),
       ),
     );
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-      decoration: const BoxDecoration(
-        color: AppColors.backgroundSecondary,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(50),
-          topRight: Radius.circular(50),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
           Text(
-            'تم إرسال الرمز إلى بريدك الاكتروني:\n${controller.email}',
+            'تم إرسال الرمز إلى البريد الإلكتروني الخاص بك:\n${controller.email}',
             textAlign: TextAlign.center,
-            style: AppTextStyles.bodyLarge.copyWith(
-              color: AppColors.textSecondary,
-              height: 1.5,
-            ),
+
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5),
           ),
           const SizedBox(height: 32),
           Directionality(
@@ -57,12 +56,18 @@ class VerificationCard extends StatelessWidget {
               separatorBuilder: (index) => const SizedBox(width: 8),
               focusedPinTheme: defaultPinTheme.copyWith(
                 decoration: defaultPinTheme.decoration!.copyWith(
-                  border: Border.all(color: AppColors.primaryGreen, width: 2),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 2,
+                  ),
                 ),
               ),
               submittedPinTheme: defaultPinTheme.copyWith(
                 decoration: defaultPinTheme.decoration!.copyWith(
-                  border: Border.all(color: AppColors.warning, width: 2),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.error,
+                    width: 1.5,
+                  ),
                 ),
               ),
             ),
@@ -76,26 +81,29 @@ class VerificationCard extends StatelessWidget {
                 backgroundColor: AppColors.primaryGreen,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
               child: Text('تحقق', style: AppTextStyles.buttonText),
             ),
           ),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'لم تستلم الرمز؟',
-                style: AppTextStyles.bodySmall,
+
+                style: Theme.of(context).textTheme.bodySmall,
               ),
               TextButton(
                 onPressed: controller.resendCode,
-                child: Text(
+                child: const Text(
                   'إعادة الإرسال',
-                  style: AppTextStyles.bodySmall.copyWith(
+                  style: TextStyle(
                     color: AppColors.primaryGreen,
                     fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
                 ),
               ),

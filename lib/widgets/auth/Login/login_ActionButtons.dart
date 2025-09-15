@@ -2,9 +2,17 @@ import 'package:abshr/constants/app_thems.dart';
 import 'package:abshr/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
-class LoginActionbuttons extends StatelessWidget {
-    final VoidCallback onLogin;
-  const LoginActionbuttons({super.key, required this.onLogin});
+class LoginActionButtons extends StatelessWidget {
+  final VoidCallback onLogin;
+  final VoidCallback onBiometricLogin; 
+  final bool isLoading;
+
+  const LoginActionButtons({
+    super.key,
+    required this.onLogin,
+    required this.onBiometricLogin, 
+    this.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +21,7 @@ class LoginActionbuttons extends StatelessWidget {
         Expanded(
           flex: 3,
           child: ElevatedButton(
-            onPressed: onLogin,
+            onPressed: isLoading ? null : onLogin,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primaryGreen,
               padding: const EdgeInsets.symmetric(vertical: 16),
@@ -21,14 +29,23 @@ class LoginActionbuttons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            child: Text('تسجيل الدخول', style: AppTextStyles.buttonText),
+            child: isLoading
+                ? const SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 3,
+                    ),
+                  )
+                : Text('تسجيل الدخول', style: AppTextStyles.buttonText),
           ),
         ),
         const SizedBox(width: 16),
         Expanded(
           flex: 1,
           child: ElevatedButton(
-            onPressed: () {}, 
+            onPressed: onBiometricLogin, // <-- تعديل هنا
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.white,
               padding: const EdgeInsets.symmetric(vertical: 16),

@@ -1,3 +1,4 @@
+import 'package:abshr/app_route.dart';
 import 'package:abshr/controler/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,13 +11,18 @@ class HomeScreen extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('الصفحة الرئيسية'),
-
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline),
+            tooltip: 'الملف الشخصي',
+            onPressed: () {
+              Get.toNamed(AppRoutes.profilescreen);
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'تسجيل الخروج',
             onPressed: () {
-
               controller.signOut();
             },
           ),
@@ -31,3 +37,4 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 }
+

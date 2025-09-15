@@ -5,14 +5,13 @@ import 'package:abshr/widgets/auth/verfiycode.dart/verfiy_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class VerifyCodeScreen extends GetView<VerifyCodeController> {
   const VerifyCodeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryGreen,
+      backgroundColor: AppColors.primaryGreen, 
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(

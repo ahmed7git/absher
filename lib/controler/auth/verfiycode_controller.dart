@@ -1,3 +1,4 @@
+import 'package:abshr/app_route.dart';
 import 'package:abshr/widgets/auth/signup/SignUpSuccessScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VerifyCodeController extends GetxController
     with GetSingleTickerProviderStateMixin {
-
   final supabase = Supabase.instance.client;
   var isLoading = false.obs;
   final pinController = TextEditingController();
@@ -19,10 +19,9 @@ class VerifyCodeController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    
+
     email = Get.arguments?['email'] ?? 'لم يتم توفير بريد إلكتروني';
 
- 
     animationController = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
@@ -58,7 +57,6 @@ class VerifyCodeController extends GetxController
     super.onClose();
   }
 
-
   Future<void> verifyCode() async {
     if (pinController.text.length != 6) {
       Get.snackbar(
@@ -71,14 +69,20 @@ class VerifyCodeController extends GetxController
 
     isLoading.value = true;
     try {
-     
-      await supabase.auth.verifyOTP(
+      final response = await supabase.auth.verifyOTP(
         type: OtpType.signup,
         email: email,
         token: pinController.text,
       );
-   
-      _showSuccessSheet();
+
+      if (response.session != null && response.user != null) {
+      
+        Get.offAllNamed(AppRoutes.home);
+        Get.snackbar('نجاح', 'تم التحقق من حسابك وتسجيل دخولك بنجاح.');
+
+      } else {
+         _showSuccessSheet();
+      }
     } on AuthException catch (e) {
       Get.snackbar('خطأ في التحقق', e.message,
           snackPosition: SnackPosition.BOTTOM);
@@ -112,4 +116,3 @@ class VerifyCodeController extends GetxController
     );
   }
 }
-

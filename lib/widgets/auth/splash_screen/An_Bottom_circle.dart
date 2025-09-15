@@ -17,7 +17,7 @@ class AnimatedBottomCircle extends StatelessWidget {
           width: Get.width * 0.7,
           height: Get.width * 0.7,
           decoration: BoxDecoration(
-            color: AppColors.primaryGreen.withOpacity(0.9),
+            color: AppColors.primaryGreen.withOpacity(0.9), 
             shape: BoxShape.circle,
           ),
         ),

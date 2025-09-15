@@ -1,5 +1,4 @@
 import 'package:abshr/constants/app_thems.dart';
-import 'package:abshr/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 
@@ -14,15 +13,21 @@ class ContinueButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.black,
           foregroundColor: AppColors.primaryGreen,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: AppTextStyles.buttonText.copyWith(color: AppColors.primaryGreen),
         ),
-        child: const Text("متابعة"),
+    
+        child: Text(
+          "متابعة",
+   
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: AppColors.primaryGreen,
+              ),
+        ),
       ),
     );
   }

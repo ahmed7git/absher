@@ -1,5 +1,4 @@
 import 'package:abshr/constants/app_thems.dart';
-import 'package:abshr/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 
@@ -28,28 +27,24 @@ class AnimatedLogoAndText extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Icon(
-                Icons.local_shipping_outlined,
-                size: 60,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.local_shipping_outlined, size: 60, color: Colors.white),
             ),
             const SizedBox(height: 24),
+           
             Text(
               'أبشر',
-              style: AppTextStyles.headlineLarge.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.bold,
-                fontSize: 48,
-              ),
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 48,
+                  ),
             ),
             const SizedBox(height: 8),
+          
             Text(
               'خدمات النقل والشحن',
-              style: AppTextStyles.bodyLarge.copyWith(
-                color: AppColors.textSecondary,
-                letterSpacing: 2,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    letterSpacing: 2,
+                  ),
             ),
           ],
         ),
